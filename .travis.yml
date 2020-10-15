@@ -23,7 +23,11 @@ matrix:
 install:
   - pip install -q nose
   - python setup.py install
-
+Before_script:
+  - |
+     if [[ "$TRAVIS_CPU_ARCH" == "ppc64le" ]]; then
+     https://github.com/nose-devs/nose/tarball/master#egg=nose-dev
+     tar -xvf nose*
+     export PATH=~/nose*/bin:$PATH
 script:
   - nosetests -w /tmp blessings.tests
-  
